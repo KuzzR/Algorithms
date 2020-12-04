@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
+#include <sys/time.h>
 
 void shellSort(int n, int array[])
 {
@@ -51,12 +51,14 @@ int main(int argc, char *argv[])
     }
     fclose(fin);
 
-    clock_t t0 = clock();
+    struct timeval stop, start;
+
+    gettimeofday(&start, NULL);
     shellSort(n, array);
-    clock_t t1 = clock();
+    gettimeofday(&stop, NULL);;
 
     FILE* fout = fopen(argv[2], "w+");
-    fprintf(fout, "%g\n", (double)(t1-t0) / CLOCKS_PER_SEC * 1000);
+    fprintf(fout, "%lu\n", (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec);
     for (int i = 0; i < n; i++)
     {
         fprintf(fout, "%d\n", array[i]);

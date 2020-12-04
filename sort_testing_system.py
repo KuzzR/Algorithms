@@ -3,9 +3,9 @@ import os
 import subprocess
 
 isPassed = True
-sort_name = input("Please write your sort name (example)\n")
+sort_name = input("Please write your testing file name\n")
 times = []
-subprocess.run(["gcc", os.getcwd()+"\\"+ sort_name + "\\" + sort_name +".c", "-o" , sort_name + ".o"])
+subprocess.run(["gcc", os.getcwd()+"\\"+ sort_name + "\\" + sort_name +".c", "-o" , os.getcwd()+"\\"+ sort_name + "\\" + sort_name + ".exe"])
 
 for i in range(100):
     print("Generating input%d file..." %(i+1))
@@ -37,7 +37,7 @@ for i in range(100):
 
 if isPassed == True:
     print("All tests passed\n")
-    print("Array length\tSort time (ms)")
+    print("Array length\tSort time (µs)")
     for i in range(100):
-        print(10*(i+1), times[i], sep = '\t')
+        print(10*(i+1), times[i], sep = '\t\t')
 input("Please press Enter to close window... ")
