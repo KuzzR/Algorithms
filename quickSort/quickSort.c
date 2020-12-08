@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <sys/time.h>
+
 void quickSort(int beg, int end, int array[])
 {
     if (end - beg > 1)
@@ -27,6 +28,7 @@ void quickSort(int beg, int end, int array[])
         quickSort(mid + 1, end, array);
 
     }
+
 }
 int main(int argc, char *argv[])
 {
