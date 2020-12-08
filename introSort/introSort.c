@@ -3,12 +3,12 @@
 #include <math.h>
 #include <sys/time.h>
 
-void screen(int top, int n, int array[])
+void sift(int top, int beg, int end, int array[])
 {
-    int nxt = top * 2 + 1;
-    if (nxt < n)
+    int nxt = beg + (top - beg) * 2 + 1;
+    if (nxt < end)
     {
-        if (nxt + 1 < n && array[nxt + 1] > array[nxt])
+        if (nxt + 1 < end && array[nxt + 1] > array[nxt])
         {
             nxt++;
         }
@@ -17,7 +17,7 @@ void screen(int top, int n, int array[])
             int temp = array[nxt];
             array[nxt] = array[top];
             array[top] = temp;
-            screen(nxt, n, array);
+            sift(nxt, beg, end, array);
         }
     }
 }
@@ -26,14 +26,14 @@ void heapSort(int beg, int end, int array[])
 {
     for (int i = (end - beg)/2 - 1; i >= 0; i--)
     {
-        screen(beg + i, end, array);
+        sift(beg + i, beg, end, array);
     }
     for (int i = end - 1; i > beg; i--)
     {
         int temp = array[i];
         array[i] = array[beg];
         array[beg] = temp;
-        screen(beg, i, array);
+        sift(beg, beg, i, array);
     }
 }
 
@@ -60,7 +60,7 @@ void introSort(int step, int swap_point, int beg, int end, int array[])
                     i++;
                 }
             }
-            introSort(step + 1, swap_point, 0, mid, array);
+            introSort(step + 1, swap_point, beg, mid, array);
             introSort(step + 1, swap_point, mid + 1, end, array);
         }
         else

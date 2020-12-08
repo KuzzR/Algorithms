@@ -3,7 +3,7 @@
 #include <math.h>
 #include <sys/time.h>
 
-void screen(int top, int n, int array[])
+void sift(int top, int n, int array[])
 {
     int nxt = top * 2 + 1;
     if (nxt < n)
@@ -17,7 +17,7 @@ void screen(int top, int n, int array[])
             int temp = array[nxt];
             array[nxt] = array[top];
             array[top] = temp;
-            screen(nxt, n, array);
+            sift(nxt, n, array);
         }
     }
 }
@@ -26,14 +26,14 @@ void heapSort(int n, int array[])
 {
     for (int i = n/2 - 1; i >= 0; i--)
         {
-            screen(i, n, array);
+            sift(i, n, array);
         }
     for (int i = n - 1; i > 0; i--)
     {
         int temp = array[i];
         array[i] = array[0];
         array[0] = temp;
-        screen(0, i, array);
+        sift(0, i, array);
     }
 
 }
