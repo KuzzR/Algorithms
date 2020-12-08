@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     gettimeofday(&stop, NULL);;
 
     FILE* fout = fopen(argv[2], "w+");
-    fprintf(fout, "%lu\n", (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec);
+    fprintf(fout, "%lu\n", ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec)/1000);
     for (int i = 0; i < n; i++)
     {
         fprintf(fout, "%d\n", array[i]);

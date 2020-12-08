@@ -2,6 +2,13 @@ from random import randint
 import os
 import subprocess
 
+try:
+    import matplotlib.pyplot as plt
+    isPlotting = True
+except:
+    print("Programm will be running without plotting. Download matplotlib to fix it")
+    isPlotting = False
+
 isPassed = True
 sort_name = input("Please write your testing file name\n")
 times = []
@@ -37,7 +44,14 @@ for i in range(100):
 
 if isPassed == True:
     print("All tests passed\n")
-    print("Array length\tSort time (µs)")
-    for i in range(100):
-        print(10*(i+1), times[i], sep = '\t\t')
+    if isPlotting == True:
+        plt.xlabel("Array lenght")
+        plt.ylabel("Sort time (ms)")
+        plt.plot([arrLen * i for i in range(100)], times, ".")
+        plt.savefig("%s\\graph.png" %sort_name)
+        print("You can find graph in %s folder" %sort_name)
+    else:
+        print("Array length\tSort time (ms)")
+        for i in range(100):
+            print(arrLen*(i+1), times[i], sep = '\t\t')
 input("Please press Enter to close window... ")
